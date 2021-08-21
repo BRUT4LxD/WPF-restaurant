@@ -6,12 +6,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Threading;
+using WPF_restauration.UIModels;
 
 namespace WPF_restauration
 {
     internal class ClientWorker
     {
-        private List<Table> _tables;
+        private List<UITable> _tables;
         private readonly int _respawnTimeInMs;
         private readonly int _occupationTimeInMs;
         private readonly Dispatcher _dispatcher;
@@ -21,7 +22,7 @@ namespace WPF_restauration
 
         public ClientWorker(
             Dispatcher dispatcher,
-            List<Table> tables,
+            List<UITable> tables,
             int respawnTimeInMs,
             int occupationTimeInMs,
             MainWindow mainWindow,
@@ -73,44 +74,41 @@ namespace WPF_restauration
             thread.Start();
         }
 
-        private void AddReservation(int tableId)
+        private Reservation AddReservation(int tableId)
         {
-            Task.Run(() => _reservationsRepository.AddAsync(new Reservation
+            var reservation = new Reservation
             {
                 StartTime = DateTime.Now,
                 Name = DataFactory.Names[new Random().Next(DataFactory.Names.Count)],
                 TableId = tableId,
                 RestaurantId = 1
-            })); ;
+            };
+            Task.Run(() => _reservationsRepository.AddAsync(reservation));
+            return reservation;
         }
 
         private void ReserveTable(int tableId)
         {
             _mainWindow.TablesOccupation[tableId] = true;
 
-            AddReservation(tableId);
-            _dispatcher?.Invoke(() =>
-            {
-                _mainWindow.TablesBackgrounds[tableId].Fill = new SolidColorBrush(Color.FromRgb(190, 20, 20));
-            });
+            var reservation = AddReservation(tableId);
+
+            _tables[tableId].UpdateTable(reservation.Name);
+
+            _dispatcher?.Invoke(() => _mainWindow.TablesBackgrounds[tableId].Fill = new SolidColorBrush(Color.FromRgb(190, 20, 20)));
         }
 
         private void FreeTable(int tableId)
         {
             _mainWindow.TablesOccupation[tableId] = false;
-            _dispatcher?.Invoke(() =>
-            {
-                _mainWindow.TablesBackgrounds[tableId].Fill = new SolidColorBrush(Color.FromRgb(115, 229, 53));
-            });
-        }
+
+            _dispatcher?.Invoke(() => _mainWindow.TablesBackgrounds[tableId].Fill = new SolidColorBrush(Color.FromRgb(115, 229, 53)));
+        }   
 
         private void UpdateNumberOfWorkers()
         {
             Interlocked.Decrement(ref _mainWindow.NumberOfWorkers);
-            _dispatcher?.Invoke(() =>
-            {
-                _mainWindow.numberOfWorkers.Text = _mainWindow.NumberOfWorkers.ToString();
-            });
+            _dispatcher?.Invoke(() => _mainWindow.numberOfWorkers.Text = _mainWindow.NumberOfWorkers.ToString());
         }
     }
 }

@@ -24,7 +24,7 @@
             <RowDefinition Height="21*"/>
         </Grid.RowDefinitions>
         <Rectangle Stroke="Black" Margin="102,0,0,0" Fill="#FF545353" RadiusX="90" Grid.Column="3" Grid.ColumnSpan="3" Grid.RowSpan="5"/>
-        <TextBox x:Name="ReservationSurname" Margin="60,0,80,50" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="30" Grid.Column="5" Grid.Row="1" FontSize="18" FontFamily="Bahnschrift Condensed" TextChanged="ReservationSurnameTextChanged"/>
+        <TextBox x:Name="ReservationSurname" Margin="60,0,80,50" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="30" Grid.Column="5" Grid.Row="1" FontSize="18" FontFamily="Bahnschrift Condensed" />
         <TextBlock Margin="63,0,78,95" TextWrapping="Wrap" Text="Imię" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold" Foreground="White" FontFamily="Cascadia Code Light" RenderTransformOrigin="0.5,0.5" TextAlignment="Center" Grid.Column="5" Height="19" Grid.Row="1">
             <TextBlock.RenderTransform>
                 <TransformGroup>
@@ -36,7 +36,7 @@
             </TextBlock.RenderTransform>
         </TextBlock>
 
-        <TextBox x:Name="ReservationPlaces" Margin="60,6,80,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Grid.Column="5" Grid.Row="2" FontSize="18" FontFamily="Bahnschrift Condensed" TextChanged="ReservationPlacesTextChanged"/>
+        <TextBox x:Name="ReservationPlaces" Margin="60,6,80,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Grid.Column="5" Grid.Row="2" FontSize="18" FontFamily="Bahnschrift Condensed"/>
         <TextBlock Margin="60,0,80,6" TextWrapping="Wrap" Text="Liczba Miejsc" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold" Foreground="White" FontFamily="Cascadia Code Light" TextAlignment="Center" Grid.Column="5" Height="19" Grid.Row="1"/>
         <Button x:Name="ReservationButton" Content="Rezerwuj" Margin="60,88,80,0" VerticalAlignment="Top" Height="40" BorderThickness="2,2,2,2" FontFamily="Cascadia Code Light" FontSize="20" Foreground="Black" Background="#FF8DEB63" FontWeight="Bold" Grid.Column="5" Grid.Row="2" Click="ReservationButtonClicked" Width="175"/>
         <Rectangle Fill="White" Stroke="Black" Grid.ColumnSpan="5" HorizontalAlignment="Center" Width="484" Grid.RowSpan="5"/>
@@ -115,8 +115,11 @@
         <Button x:Name="StartWorkersButton" Content="Start Workers" Margin="215,114,15,12" BorderThickness="2,2,2,2" FontFamily="Cascadia Code Light" Foreground="Black" Background="#FFEBA763" FontWeight="Bold" Grid.Column="5" Grid.Row="3" Click="StartWorkersButtonClicked" FontSize="10" Grid.RowSpan="2"/>
         <TextBlock x:Name="numberOfWorkersLabel" Margin="220,93,39,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="11" FontWeight="Bold" Foreground="White" FontFamily="Cascadia Code Light" Height="16" Grid.Row="3" Grid.Column="5"><Run Text="Workers:"/><LineBreak/><Run/></TextBlock>
         <TextBlock x:Name="numberOfWorkers" Margin="276,93,15,21" TextWrapping="Wrap" FontSize="11" FontWeight="Bold" Foreground="White" FontFamily="Cascadia Code Light" Grid.Row="3" Grid.Column="5" Text="0"/>
-
-
-
+        <TextBlock x:Name="Table1Name" TextWrapping="Wrap" Text="NoName" FontSize="10" FontWeight="Bold" Foreground="#FF560C0C" FontFamily="Cascadia Code Light" Grid.Column="1" Grid.Row="1" Margin="112,2,2,118"/>
+        <TextBlock x:Name="Table2Name" TextWrapping="Wrap" Text="NoName" FontSize="10" FontWeight="Bold" Foreground="#FF560C0C" FontFamily="Cascadia Code Light" Grid.Column="3" Margin="120,2,5,113" Grid.Row="1"/>
+        <TextBlock x:Name="Table3Name" TextWrapping="Wrap" Text="NoName" FontSize="10" FontWeight="Bold" Foreground="#FF560C0C" FontFamily="Cascadia Code Light" Grid.Column="1" Grid.Row="2" Margin="112,2,2,113"/>
+        <TextBlock x:Name="Table4Name" TextWrapping="Wrap" Text="NoName" FontSize="10" FontWeight="Bold" Foreground="#FF560C0C" FontFamily="Cascadia Code Light" Grid.Column="3" Grid.Row="2" Margin="120,2,5,113"/>
+        <TextBlock x:Name="Table5Name" TextWrapping="Wrap" Text="NoName" FontSize="10" FontWeight="Bold" Foreground="#FF560C0C" FontFamily="Cascadia Code Light" Grid.Column="1" Grid.Row="3" Margin="112,2,2,111"/>
+        <TextBlock x:Name="Table6Name" TextWrapping="Wrap" Text="NoName" FontSize="10" FontWeight="Bold" Foreground="#FF560C0C" FontFamily="Cascadia Code Light" Grid.Column="3" Grid.Row="3" Margin="120,2,5,113" RenderTransformOrigin="0.467,1"/>
     </Grid>
 </Window>
