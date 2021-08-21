@@ -17,11 +17,11 @@ namespace WPF_restauration
     public partial class MainWindow : Window
     {
         public delegate void MainWindowEventHandler();
-        public ConcurrentDictionary<int, bool> TablesOccupation = new ConcurrentDictionary<int, bool>();
-        public Dictionary<int, Rectangle> TablesBackgrounds = new Dictionary<int, Rectangle>();
-        public static object TablesLock = new object();
-        public static object TablesUnlock = new object();
-        public static object NumberOfWorkersLock = new object();
+        public ConcurrentDictionary<int, bool> TablesOccupation = new();
+        public Dictionary<int, Rectangle> TablesBackgrounds = new();
+        public static object TablesLock = new();
+        public static object TablesUnlock = new();
+        public static object NumberOfWorkersLock = new();
         public List<UITable> UITables;
         public int NumberOfWorkers = 0;
 

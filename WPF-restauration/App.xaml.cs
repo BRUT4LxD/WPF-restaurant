@@ -10,7 +10,7 @@ namespace WPF_restauration
     /// </summary>
     public partial class App : Application
     {
-        public static RestaurantContext RestaurantContext = new RestaurantContext(
+        public static RestaurantContext RestaurantContext = new(
             new DbContextOptionsBuilder<RestaurantContext>()
             .UseInMemoryDatabase("RestaurantDb").Options);
         protected override void OnStartup(StartupEventArgs e)
