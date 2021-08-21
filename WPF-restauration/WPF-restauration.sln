@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31423.177
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF-restauration", "WPF-restauration.csproj", "{793A5391-CF42-442B-8FC3-08D3685D2168}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "..\Database\Database.csproj", "{34BC9637-B3BC-44B1-9A78-F8728519692A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{793A5391-CF42-442B-8FC3-08D3685D2168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{793A5391-CF42-442B-8FC3-08D3685D2168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{793A5391-CF42-442B-8FC3-08D3685D2168}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{793A5391-CF42-442B-8FC3-08D3685D2168}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34BC9637-B3BC-44B1-9A78-F8728519692A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34BC9637-B3BC-44B1-9A78-F8728519692A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34BC9637-B3BC-44B1-9A78-F8728519692A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34BC9637-B3BC-44B1-9A78-F8728519692A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ABFA72DD-E3FD-4908-8D7B-122F5D5379F4}
+	EndGlobalSection
+EndGlobal
