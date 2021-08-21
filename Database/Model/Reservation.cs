@@ -12,8 +12,8 @@ namespace Database.Model
 
         public DateTime EndTime { get; set; } = DateTime.MaxValue;
 
-        public Table Table { get; set; }
+        public int TableId { get; set; }
 
-        public Restaurant Restaurant { get; set; }
+        public int RestaurantId { get; set; }
     }
 }
