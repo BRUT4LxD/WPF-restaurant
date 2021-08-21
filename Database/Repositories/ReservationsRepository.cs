@@ -24,9 +24,15 @@ namespace Database.Repositories
 
         public async Task<Reservation> GetReservation(int id) => await _context.Reservations.FindAsync(id);
 
-        public async Task<List<Reservation>> GetOngoingReservation() => await _context.Reservations.Where(e => e.EndTime > DateTime.Now).ToListAsync();
+        public async Task<List<Reservation>> GetOngoingReservations() => await _context.Reservations.Where(e => e.EndTime > DateTime.Now).ToListAsync();
 
         public Task<List<Reservation>> GetReservations() => _context.Reservations.ToListAsync();
+
+        public async Task UpdateAsync(Reservation reservation)
+        {
+            _context.Update(reservation);
+            await _context.SaveChangesAsync();
+        }
 
     }
 }

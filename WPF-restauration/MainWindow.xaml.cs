@@ -64,15 +64,27 @@ namespace WPF_restauration
             };
         }
 
-        private void ReservationButtonClicked(object sender, RoutedEventArgs e)
+        private async void ReservationButtonClicked(object sender, RoutedEventArgs e)
         {
-            StartWorker(ReservationSurname.Text);
+            if (!int.TryParse(ReservationPlaces.Text, out var seats) && seats >= 0)
+            {
+                MessageBox.Show("liczba miejsc musi być dodatnią liczbą naturalną", "Invalid input", MessageBoxButton.OK, MessageBoxImage.Error);
+            };
+            var tables = await new TablesRepository(App.RestaurantContext).GetTablesAsync();
+            var reservations = await new ReservationsRepository(App.RestaurantContext).GetOngoingReservations();
+
+            if(tables.Any(t => (reservations.Count == 0 || reservations.All(r => r.TableId != t.Id)) && t.AvailablePlaces >= seats)) {
+                StartWorker(ReservationSurname.Text);
+                return;
+            }
+
+            MessageBox.Show("Brak wolnych stołów na " + seats + " miejsc", "Brak miejsc", MessageBoxButton.OK);
         }
 
         private async void ShowReservationsButtonClicked(object sender, RoutedEventArgs e)
         {
             var reservations = await new ReservationsRepository(App.RestaurantContext).GetReservations();
-            string message = reservations.Count != 0 ? reservations.Take(10).Select(e => e.ToString()).Aggregate((a, b) => a + "\n" + b) : "No reservations registered";
+            string message = reservations.Count != 0 ? reservations.OrderByDescending(e => e.StartTime).Take(10).Select(e => e.ToString()).Aggregate((a, b) => a + "\n" + b) : "No reservations registered";
             MessageBox.Show(message, "Reservations Registry", MessageBoxButton.OK);
         }
 
@@ -83,7 +95,7 @@ namespace WPF_restauration
             Interlocked.Increment(ref NumberOfWorkers);
             numberOfWorkers.Text = NumberOfWorkers.ToString();
 
-            var w1 = new ClientWorker(UITables, 3000, 3000, this, new ReservationsRepository(App.RestaurantContext), workerName);
+            var w1 = new ClientWorker(UITables, 10000, 10000, this, new ReservationsRepository(App.RestaurantContext), workerName);
 
             w1.Run();
         }

@@ -17,6 +17,6 @@ namespace Database.Model
         public int RestaurantId { get; set; }
 
         public override string ToString()
-            => "Id: " + Id.ToString() + "\t Name:" + Name + " \t Time: " + StartTime.ToString("HH:mm:ss:fff") + "\t Table: " + (TableId + 1).ToString();
+            => "Id: " + Id.ToString() + "\t Imię: " + Name + " \t Czas rezerwacji: " + StartTime.ToString("HH:mm:ss:fff") + "\t Stół: " + (TableId + 1).ToString();
     }
 }

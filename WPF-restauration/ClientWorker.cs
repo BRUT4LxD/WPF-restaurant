@@ -2,6 +2,7 @@
 using Database.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media;
@@ -98,12 +99,20 @@ namespace WPF_restauration
             _mainWindow.Dispatcher?.Invoke(() => _mainWindow.TablesBackgrounds[tableId].Fill = new SolidColorBrush(Color.FromRgb(190, 20, 20)));
         }
 
-        private void FreeTable(int tableId)
+        private async void FreeTable(int tableId)
         {
             _mainWindow.TablesOccupation[tableId] = false;
 
+            var reservations = await _reservationsRepository.GetOngoingReservations();
+
+            var reservation = reservations.First(e => e.TableId == tableId);
+            reservation.EndTime = DateTime.Now;
+
+            await _reservationsRepository.UpdateAsync(reservation);
+
             _mainWindow.Dispatcher?.Invoke(() => _mainWindow.TablesBackgrounds[tableId].Fill = new SolidColorBrush(Color.FromRgb(115, 229, 53)));
-        }   
+            _tables[tableId].UpdateTable("");
+        }
 
         private void UpdateNumberOfWorkers()
         {
