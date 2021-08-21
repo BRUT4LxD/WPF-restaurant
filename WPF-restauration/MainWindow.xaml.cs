@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -65,15 +66,24 @@ namespace WPF_restauration
 
         private void ReservationButtonClicked(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Button clicked");
+            StartWorker(ReservationSurname.Text);
         }
 
-        private void StartWorkersButtonClicked(object sender, RoutedEventArgs e)
+        private async void ShowReservationsButtonClicked(object sender, RoutedEventArgs e)
+        {
+            var reservations = await new ReservationsRepository(App.RestaurantContext).GetReservations();
+            string message = reservations.Count != 0 ? reservations.Take(10).Select(e => e.ToString()).Aggregate((a, b) => a + "\n" + b) : "No reservations registered";
+            MessageBox.Show(message, "Reservations Registry", MessageBoxButton.OK);
+        }
+
+        private void StartWorkersButtonClicked(object sender, RoutedEventArgs e) => StartWorker();
+
+        private void StartWorker(string workerName = "")
         {
             Interlocked.Increment(ref NumberOfWorkers);
             numberOfWorkers.Text = NumberOfWorkers.ToString();
 
-            var w1 = new ClientWorker(Dispatcher, UITables, 3000, 3000, this, new ReservationsRepository(App.RestaurantContext));
+            var w1 = new ClientWorker(UITables, 3000, 3000, this, new ReservationsRepository(App.RestaurantContext), workerName);
 
             w1.Run();
         }
